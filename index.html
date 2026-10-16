@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="description" content="Dunyo TV: xorijiy telekanallar o'zbekcha subtitr bilan. Test rejimi.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dunyo TV o'zbekcha — test rejimi</title>
+<style>
+:root{--bg:#101B4B;--card:#1D2F8F;--ink:#EDF0FF;--mute:#A9B4E0;--gold:#F2B544;--teal:#2EC4B6;--line:#3A4BA8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:8px 0 2px}
+.sub{color:var(--mute);margin:0 0 16px;font-size:.92rem}
+.badge{display:inline-block;background:var(--gold);color:#2b1c00;font-weight:800;font-size:.75rem;padding:3px 8px;border-radius:6px;margin-left:8px;vertical-align:middle}
+.box{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line)}
+video{width:100%;height:100%;display:block;background:#000}
+#cc{position:absolute;left:6%;right:6%;bottom:56px;text-align:center;color:#fff;background:rgba(0,0,0,.72);padding:6px 12px;border-radius:6px;font-size:1.1rem;display:none;pointer-events:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+textarea{min-height:150px;resize:vertical}
+button{font:inherit;font-weight:600;cursor:pointer;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-height:44px}
+button.pri{background:var(--gold);color:#2b1c00;border-color:var(--gold)}
+button[aria-pressed="true"]{background:var(--teal);color:#06182E;border-color:var(--teal)}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+label{display:block;font-weight:700;margin:16px 0 6px}
+#st{min-height:1.5em;color:var(--mute);font-size:.9rem}
+#st.err{color:#FFB4B4}
+.note{margin-top:16px;padding:12px;border:1px dashed var(--line);border-radius:10px;color:var(--mute);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Dunyo TV <span class="badge">Test rejimi</span></h1>
+<p class="sub">Jonli oqim havolasini qo'ying, o'zbekcha subtitr bilan sinab ko'ring.</p>
+
+<div class="box"><video id="v" controls playsinline></video><div id="cc"></div></div>
+<p id="st"></p>
+
+<label for="url">Oqim havolasi (.m3u8)</label>
+<input type="text" id="url" placeholder="https://.../playlist.m3u8" inputmode="url">
+<div class="row">
+  <button class="pri" id="play">Ijro etish</button>
+  <button id="demo">Sinov oqimini qo'yish</button>
+</div>
+
+<label for="subs">O'zbekcha subtitr (soniya | matn)</label>
+<textarea id="subs" spellcheck="false">0 | Dunyo TV sinov rejimiga xush kelibsiz.
+5 | Bu subtitr qo'lda kiritilgan namuna.
+10 | Haqiqiy tarjima keyingi bosqichda avtomatik bo'ladi.
+15 | O'zbek tilida dunyo kanallari bir joyda.</textarea>
+<div class="row">
+  <button id="subBtn" aria-pressed="false">Subtitrni yoqish</button>
+  <button id="sm" aria-label="Harfni kichraytirish">A−</button>
+  <button id="lg" aria-label="Harfni kattalashtirish">A+</button>
+  <button id="auto" disabled title="Keyingi bosqichda serverda ishlaydi">Avto-tarjima (tez orada)</button>
+</div>
+
+<p class="note">Bu test sahifasi. Subtitr hozircha qo'lda yoziladi, avtomatik ovozni tanish va tarjima serverda ishlaydi va keyingi bosqichda qo'shiladi. Ba'zi kanallar boshqa saytlarda ijro etilishini taqiqlaydi (CORS), unda "Oqim ochilmadi" xabari chiqadi. Sahifa internet bilan ochilishi kerak. Faqat o'zingiz ko'rishga haqli oqimlardan foydalaning.</p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.8/hls.min.js"></script>
+<script>
+var v=document.getElementById("v"),cc=document.getElementById("cc"),st=document.getElementById("st"),hls=null,on=false,size=1.1,cues=[];
+function msg(t,e){st.textContent=t;st.className=e?"err":""}
+function load(){
+  var u=document.getElementById("url").value.trim();
+  if(!u){msg("Avval oqim havolasini kiriting.",1);return}
+  if(hls){hls.destroy();hls=null}
+  msg("Yuklanmoqda...");
+  if(window.Hls&&Hls.isSupported()){
+    hls=new Hls();
+    hls.on(Hls.Events.ERROR,function(e,d){if(d.fatal)msg("Oqim ochilmadi. Havola noto'g'ri yoki kanal ruxsat bermayapti.",1)});
+    hls.on(Hls.Events.MANIFEST_PARSED,function(){msg("Oqim ulandi.");v.play().catch(function(){})});
+    hls.loadSource(u);hls.attachMedia(v);
+  }else if(v.canPlayType("application/vnd.apple.mpegurl")){
+    v.src=u;v.play().catch(function(){});msg("Oqim ulandi.");
+  }else{msg("Bu brauzer HLS oqimini qo'llamaydi. Chrome yoki Safari'dan foydalaning.",1)}
+}
+function parse(){
+  cues=[];document.getElementById("subs").value.split("\n").forEach(function(l){
+    var m=l.match(/^\s*(\d+(?:\.\d+)?)\s*\|\s*(.+)$/);if(m)cues.push({t:parseFloat(m[1]),s:m[2]});
+  });
+  cues.sort(function(a,b){return a.t-b.t});
+}
+function show(){
+  if(!on){cc.style.display="none";return}
+  var t=v.currentTime,cur=null;
+  for(var i=0;i<cues.length;i++){if(cues[i].t<=t)cur=cues[i]}
+  if(cur){cc.textContent=cur.s;cc.style.display="block"}else cc.style.display="none";
+}
+document.getElementById("play").onclick=load;
+document.getElementById("demo").onclick=function(){document.getElementById("url").value="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";msg("Sinov havolasi qo'yildi. Agar ochilmasa, o'zingizniki bilan almashtiring.")};
+document.getElementById("subBtn").onclick=function(){on=!on;this.setAttribute("aria-pressed",on);this.textContent=on?"Subtitr yoqilgan":"Subtitrni yoqish";parse();show()};
+document.getElementById("subs").oninput=function(){parse();show()};
+document.getElementById("sm").onclick=function(){size=Math.max(.8,size-.1);cc.style.fontSize=size+"rem"};
+document.getElementById("lg").onclick=function(){size=Math.min(2,size+.1);cc.style.fontSize=size+"rem"};
+v.addEventListener("timeupdate",show);v.addEventListener("seeked",show);
+parse();
+</script>
+</body>
+</html>
