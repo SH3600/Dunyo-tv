@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<meta name="description" content="Dunyo TV: xorijiy telekanallar o'zbekcha subtitr bilan. Test rejimi.">
+<meta name="description" content="Dunyo TV: xorijiy telekanallar, videolar va musiqa o'zbekcha. Test rejimi.">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dunyo TV o'zbekcha — test rejimi</title>
 <style>
@@ -13,11 +13,12 @@ body{margin:0;background:radial-gradient(900px 500px at 100% -10%,#1B2A78 0,tran
 main{max-width:760px;margin:0 auto;padding:16px 16px 130px}
 h1{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:6px 0 2px}.sub{color:var(--mute);margin:0 0 14px;font-size:.92rem}
 .badge{background:var(--gold);color:#2b1c00;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:99px;margin-left:8px;vertical-align:middle}
-.box{position:relative;background:#000;border-radius:20px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);box-shadow:0 12px 32px rgba(0,0,0,.45)}
+.box{position:relative;background:#000;border-radius:20px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);box-shadow:0 12px 32px rgba(0,0,0,.45);scroll-margin-top:8px}
 video{width:100%;height:100%;display:block}
 #ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;text-align:center;padding:0 12px;pointer-events:none;background:repeating-linear-gradient(135deg,#0B1230 0 22px,#101A44 22px 44px)}
 #cc{position:absolute;left:6%;right:6%;bottom:52px;text-align:center;color:#fff;background:rgba(0,0,0,.72);padding:6px 12px;border-radius:8px;font-size:1.05rem;display:none;pointer-events:none}
-#st{min-height:1.5em;margin:10px 0;color:var(--mute);font-size:.9rem}#st.err{color:#FF8A80}
+#pd{margin:10px 2px 0;font-size:.92rem;color:var(--mute)}#pd b{display:block;color:var(--ink);font-size:1.05rem}
+#st{min-height:1.5em;margin:8px 0;color:var(--mute);font-size:.9rem}#st.err{color:#FF8A80}
 button,input,select,textarea{font:inherit;color:var(--ink)}button{cursor:pointer}
 .btn{border:0;background:var(--s2);padding:10px 16px;border-radius:999px;font-weight:700;min-height:44px}
 .btn.pri{background:var(--gold);color:#2b1c00}
@@ -26,13 +27,15 @@ button,input,select,textarea{font:inherit;color:var(--ink)}button{cursor:pointer
 .cc{background:var(--ink);color:var(--bg);border-radius:4px;padding:0 5px;font-size:.7rem;font-weight:800;margin-right:6px}
 .row2{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .inp{width:100%;min-height:46px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--s1)}
-textarea.inp{min-height:130px}
+textarea.inp{min-height:110px}
 details{margin:0 0 12px}summary{cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-weight:700;min-height:48px;list-style:none}
 summary::-webkit-details-marker{display:none}details[open] summary{border-color:var(--teal)}
 .af{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 .ttl{font-size:1.25rem;font-weight:800;margin:22px 0 12px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px}.chips button{flex:none;border:1px solid var(--line);background:var(--s1);border-radius:99px;padding:6px 14px;font-weight:600;min-height:38px}.chips button.on{background:var(--gold);color:#2b1c00;border-color:var(--gold)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+.grid.v{grid-template-columns:1fr}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}.grid.v{grid-template-columns:repeat(2,1fr)}}
 .tile{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 10px 24px rgba(0,0,0,.4)}
 .tile::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 18px,rgba(255,255,255,.06) 18px 36px)}
 .tile.cur{outline:3px solid var(--gold);outline-offset:-3px}
@@ -41,12 +44,20 @@ summary::-webkit-details-marker{display:none}details[open] summary{border-color:
 .meta{display:flex;flex-direction:column;gap:2px;margin:-14px;padding:34px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.72))}
 .meta b{font-size:1.05rem;line-height:1.2}.meta i{font-style:normal;font-size:.8rem;opacity:.85}
 .chip{align-self:flex-start;margin-top:6px;font-size:.72rem;font-weight:700;font-style:normal;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.2)}.chip.on{background:var(--gold);color:#2b1c00}
+.vc{position:relative;background:var(--s1);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.vc.cur{border-color:var(--gold)}
+.vc .po{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:2.6rem;border:0;color:#fff}
+.vc .bd{padding:12px 14px 14px}.vc h3{font-size:1rem;margin:0 0 4px;line-height:1.25;padding-right:44px}
+.vc p{margin:0;color:var(--mute);font-size:.86rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.vc small{display:inline-block;margin-top:6px;font-size:.72rem;font-weight:700;color:var(--teal)}
+.rec{position:absolute;left:10px;top:10px;background:var(--gold);color:#2b1c00;font-size:.68rem;font-weight:800;padding:3px 9px;border-radius:99px;z-index:2}
+.cr{font-size:.76rem;color:var(--mute);margin-top:4px}
 .star,.del{position:absolute;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.4);color:#fff;font-size:1.25rem;display:grid;place-items:center;z-index:2}
 .star{top:10px}.del{top:58px;font-size:1rem}.star.on{color:var(--gold)}
 .note{padding:12px 14px;border:1px dashed var(--line);border-radius:14px;color:var(--mute);font-size:.84rem;margin-top:14px}
-nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px;background:rgba(20,29,74,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
-nav button{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;border-radius:18px;padding:8px 2px;min-height:58px;color:var(--mute);font-size:.72rem;font-weight:700}
-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav{position:fixed;left:8px;right:8px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;z-index:20;display:grid;grid-template-columns:repeat(6,1fr);gap:2px;padding:6px;background:rgba(20,29,74,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+nav button{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;border-radius:18px;padding:8px 0;min-height:58px;color:var(--mute);font-size:.64rem;font-weight:700}
+nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 nav button[aria-selected="true"]{background:rgba(242,181,68,.16);color:var(--gold)}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </style>
@@ -54,7 +65,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <body>
 <main>
 <h1>Dunyo TV <span class="badge">Test rejimi</span></h1>
-<p class="sub">Xorijiy kanallarni o'zbekcha subtitr bilan ko'ring.</p>
+<p class="sub">Kanallar, videolar va musiqa o'zbekcha subtitr bilan.</p>
 
 <details class="auth"><summary>Kirish / Ro'yxatdan o'tish</summary><div class="af">
 <button class="btn" id="tgBtn">Telegram orqali kirish</button>
@@ -64,9 +75,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <button class="btn" id="guestBtn">Mehmon sifatida davom etish</button>
 <p class="note" id="authMsg" style="margin:0">Maket: kirish keyingi bosqichda ishlaydi.</p></div></details>
 
-<div class="box"><video id="v" controls playsinline></video><iframe id="emb" title="Tashqi pleyer" allow="autoplay; fullscreen; encrypted-media" allowfullscreen style="display:none;position:absolute;inset:0;width:100%;height:100%;border:0;background:#000"></iframe><div id="ph">Kanalni tanlang</div><div id="cc"></div></div>
+<div class="box" id="box"><video id="v" controls playsinline></video><iframe id="emb" title="Tashqi pleyer" allow="autoplay; fullscreen; encrypted-media" allowfullscreen style="display:none;position:absolute;inset:0;width:100%;height:100%;border:0;background:#000"></iframe><div id="ph">Tanlang</div><div id="cc"></div></div>
+<div id="pd"></div>
 <p id="st"></p>
-<input class="inp" type="text" id="url" placeholder="Havola: .m3u8, .mp4, .mpd, YouTube, Vimeo" inputmode="url" aria-label="Kanal havolasi">
+<input class="inp" type="text" id="url" placeholder="Havola: .m3u8, .mp4, .mpd, YouTube, Vimeo" inputmode="url" aria-label="Havola">
 <div class="row2"><button class="btn pri" id="play">▶ Ijro etish</button><button class="btn" id="save">Havolani saqlash</button></div>
 
 <div class="row2">
@@ -81,17 +93,47 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 15 | O'zbek tilida dunyo kanallari bir joyda. | World channels in Uzbek, in one place.</textarea></details>
 
 <h2 class="ttl" id="ttl"></h2>
+<div id="tools" style="display:none"><input class="inp" type="search" id="q" placeholder="Nomi yoki tavsifi bo'yicha qidirish" aria-label="Qidirish"><div class="chips" id="chips"></div></div>
 <div id="list"></div>
 
-<details><summary>+ Yangi kanal qo'shish</summary><div class="af">
+<details><summary>+ Kanal qo'shish</summary><div class="af">
 <input class="inp" type="text" id="an" placeholder="Kanal nomi" aria-label="Kanal nomi">
 <input class="inp" type="text" id="au" placeholder="Havola (.m3u8)" inputmode="url" aria-label="Kanal havolasi">
 <select class="inp" id="at" aria-label="Bo'lim"><option value="kino">Kino</option><option value="futbol">Futbol</option></select>
 <button class="btn pri" id="addBtn">Qo'shish</button></div></details>
 
-<p class="note">Bu test sahifasi. Kanallar va havolalar faqat shu brauzerda saqlanadi. Havola turlari: .m3u8 (HLS), .mp4/.webm, .mpd (DASH), YouTube va Vimeo. rtmp/rtsp va DRM bilan himoyalangan oqimlar ochilmaydi. Ba'zi kanallar boshqa saytda ijro etilishini taqiqlaydi (CORS) yoki hudud bilan cheklangan. Futbol kanallari pullik va rasmiy ruxsat talab qiladi. Faqat ko'rishga haqli oqimlardan foydalaning.</p>
+<details><summary>+ Video va musiqa qo'shish</summary><div class="af">
+<input class="inp" type="text" id="vt" placeholder="Sarlavha" aria-label="Sarlavha">
+<input class="inp" type="text" id="vu" placeholder="Havola (YouTube, YouTube pleylist, .mp4, .m3u8...)" inputmode="url" aria-label="Havola">
+<textarea class="inp" id="vd" placeholder="Bu video nima haqida? (qisqa tavsif)" aria-label="Tavsif" style="min-height:80px"></textarea>
+<select class="inp" id="vp" aria-label="Bo'lim"><option value="video">Videolar</option><option value="musiqa">Musiqa</option></select>
+<input class="inp" type="text" id="vc" placeholder="Kategoriya (masalan: Animatsiya, Pop, Dokumental)" aria-label="Kategoriya">
+<button class="btn pri" id="vadd">Qo'shish</button>
+<p class="note" style="margin:0">Ko'p videoni birdan qo'shish: har qatorga bittadan yozing.<br><code>Sarlavha | havola | tavsif | video yoki musiqa | kategoriya</code></p>
+<textarea class="inp" id="bulk" spellcheck="false" placeholder="Sarlavha | https://youtu.be/... | Tavsif | musiqa | Pop"></textarea>
+<button class="btn pri" id="bulkBtn">Ro'yxatni qo'shish</button>
+<button class="btn" id="exp">videos.json yuklab olish</button>
+<p class="note" style="margin:0">Qo'shganlaringiz faqat shu brauzerda saqlanadi. Hamma foydalanuvchi ko'rishi uchun "videos.json" ni yuklab olib, GitHub'dagi repozitoriyga shu nom bilan yuklang.</p></div></details>
+
+<details><summary>+ YouTube'dan avtomatik qo'shish</summary><div class="af">
+<input class="inp" type="password" id="ykey" placeholder="YouTube API kaliti" autocomplete="off" aria-label="YouTube API kaliti">
+<input class="inp" type="text" id="yq" placeholder="Qo'shiq nomi yoki qidiruv so'zi" aria-label="Qidiruv so'zi">
+<select class="inp" id="yp" aria-label="Bo'lim"><option value="musiqa">Musiqa</option><option value="video">Videolar</option></select>
+<input class="inp" type="text" id="yc" placeholder="Kategoriya (masalan: Pop)" aria-label="Kategoriya">
+<select class="inp" id="yn" aria-label="Nechta"><option value="1">1 ta (qo'shiq nomi bo'yicha)</option><option value="30">30 ta</option><option value="50" selected>50 ta</option><option value="100">100 ta</option><option value="150">150 ta</option></select>
+<button class="btn pri" id="ygo">Qidirish va qo'shish</button>
+<p class="note" style="margin:0">Kalit olish: Google Cloud Console, yangi loyiha, "YouTube Data API v3" ni yoqing, Credentials bo'limida API key yarating va uni "HTTP referrer" orqali sh3600.github.io saytiga cheklang. Faqat saytga o'rnatish ruxsat etilgan videolar qo'shiladi.</p></div></details>
+
+<p class="note">Bu test sahifasi. Havola turlari: .m3u8 (HLS), .mp4/.webm, .mpd (DASH), YouTube (video va pleylist), Vimeo. rtmp/rtsp va DRM bilan himoyalangan oqimlar ochilmaydi. Faqat ko'rishga va namoyish etishga haqli kontentdan foydalaning.</p>
 </main>
-<nav aria-label="Bo'limlar"><button data-tab="kino" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v4M13 5v4M18 5v4"/></svg><span>Kino</span></button><button data-tab="futbol" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.4 2.5-1.3 4H9.9l-1.3-4zM12 3v5M20.5 9.5l-5.1 1M17 19.5l-2.9-5M7 19.5l2.9-5M3.5 9.5l5.1 1"/></svg><span>Futbol</span></button><button data-tab="top" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>To'plamlar</span></button><button data-tab="sev" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.5 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Sevimlilar</span></button></nav>
+<nav aria-label="Bo'limlar">
+<button data-tab="kino" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v4M13 5v4M18 5v4"/></svg><span>Kino</span></button>
+<button data-tab="futbol" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.4 2.5-1.3 4H9.9l-1.3-4zM12 3v5M20.5 9.5l-5.1 1M17 19.5l-2.9-5M7 19.5l2.9-5M3.5 9.5l5.1 1"/></svg><span>Futbol</span></button>
+<button data-tab="vid" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg><span>Video</span></button>
+<button data-tab="mus" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2.5"/><circle cx="17" cy="16" r="2.5"/></svg><span>Musiqa</span></button>
+<button data-tab="top" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>To'plam</span></button>
+<button data-tab="sev" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.5 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Sevimli</span></button>
+</nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.8/hls.min.js"></script>
 <script>
@@ -109,27 +151,34 @@ var DEF=[
 {id:"canalbein",n:"Canal+ / beIN Sports",c:"Fransiya (pullik)",t:"futbol",u:""},
 {id:"movistar",n:"Movistar+",c:"Ispaniya (pullik)",t:"futbol",u:""}];
 var COLS=[{t:"Kino kechasi",d:"Uch mamlakat kinosi",l:["film4","arte","raimovie"]},{t:"Gollivud va fantastika",d:"Ekshn va ilmiy fantastika",l:["film4","kabeleins","tele5"]},{t:"Nemis tilini o'rganish",d:"Ikki tilli subtitr bilan",l:["kabeleins","tele5","arte"]},{t:"Futbol kuni",d:"Rasmiy hamkorlikdan keyin",l:["skysports","tntsports","dazn"]}];
-var S={urls:{},favs:{},custom:[]},tab="kino",flt=null,cur=null,hls=null,subOn=false,dual=false,size=1.05,cues=[],ccx=$("cc"),v=$("v");
-try{var raw=localStorage.getItem("dtv");if(raw){var o=JSON.parse(raw);S.urls=o.urls||{};S.favs=o.favs||{};S.custom=o.custom||[]}}catch(e){}
+var CAT=[{"id":"sinov-hls","ch":"Mux test oqimi","t":"Sinov oqimi (HLS)","d":"Oqim ishlayotganini tekshirish uchun ochiq sinov videosi.","u":"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8","tp":"video","c":"Test"},{"id":"bbb","ch":"Blender Foundation","t":"Big Buck Bunny","d":"Ochiq litsenziyali qisqa animatsiya.","u":"https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4","tp":"video","c":"Animatsiya"},{"id":"sintel","ch":"Blender Foundation","t":"Sintel (treyler)","d":"Animatsion film treyleri.","u":"https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4","tp":"video","c":"Animatsiya"},{"id":"uzsong01","ch":"YouTube","t":"Hamdam Sobirov & Jamshid Himmatov — Yomg'irlar","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=IvVj4FrzdVo","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/IvVj4FrzdVo/mqdefault.jpg"},{"id":"uzsong02","ch":"YouTube","t":"Mashhur Muhammad — Siqilma","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=_e7vmODn6gg","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/_e7vmODn6gg/mqdefault.jpg"},{"id":"uzsong03","ch":"YouTube","t":"Yulduz Usmonova — Ensa","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=ZwKeWWnzeE4","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/ZwKeWWnzeE4/mqdefault.jpg"},{"id":"uzsong04","ch":"YouTube","t":"Osman Navruzov & Nefes — Yonimda bo'l, jonim","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=zNtc_cIyKcU","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/zNtc_cIyKcU/mqdefault.jpg"},{"id":"uzsong05","ch":"YouTube","t":"G'aybulla Tursunov — Xastaman-u","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=AHpUF2D2jao","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/AHpUF2D2jao/mqdefault.jpg"},{"id":"uzsong06","ch":"YouTube","t":"Sunnatillo Do'stov — Alyonushka","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=cFjTcxZTZJg","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/cFjTcxZTZJg/mqdefault.jpg"},{"id":"uzsong07","ch":"YouTube","t":"Abror Do'stov — Yigitga yo'qchilik kelganda","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=rvdRqsjtihc","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/rvdRqsjtihc/mqdefault.jpg"},{"id":"uzsong08","ch":"YouTube","t":"Mirjalol Ne'matov — Dilbar","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=lVRCeER1qMA","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/lVRCeER1qMA/mqdefault.jpg"},{"id":"uzsong09","ch":"YouTube","t":"Sevinch Ismoilova & Alisher Bayniyazov — Kel yorim","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=G69lrMvMnx0","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/G69lrMvMnx0/mqdefault.jpg"},{"id":"uzsong10","ch":"YouTube","t":"Bahrom Nazarov — Olcha guli","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=xuvKH_gwaig","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/xuvKH_gwaig/mqdefault.jpg"},{"id":"uzsong11","ch":"YouTube","t":"Munisa Rizayeva — Oka","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=aR07an7Pl1c","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/aR07an7Pl1c/mqdefault.jpg"},{"id":"uzsong12","ch":"YouTube","t":"Jahongir Otajonov — Happy birthday to you","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=Lp2riL9OyCY","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/Lp2riL9OyCY/mqdefault.jpg"},{"id":"uzsong13","ch":"YouTube","t":"Farrux Fazel — Bor, o'shalarga bor","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=cmnLlTLmmjI","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/cmnLlTLmmjI/mqdefault.jpg"},{"id":"uzsong14","ch":"YouTube","t":"Hamdam Sobirov — Sog'insang","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=zIHfdHFH-VA","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/zIHfdHFH-VA/mqdefault.jpg"},{"id":"uzsong15","ch":"YouTube","t":"Ziyoda — Dalalar","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=RHSwgMHLI2w","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/RHSwgMHLI2w/mqdefault.jpg"},{"id":"uzsong16","ch":"YouTube","t":"Hojiakbar Ro'zmetov — Sev mani","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=qMMg5z2RWn8","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/qMMg5z2RWn8/mqdefault.jpg"},{"id":"uzsong17","ch":"YouTube","t":"Hojiakbar Ro'zmetov — Ko'rmasam bo'lmas","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=Kf3FgYLZ3EQ","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/Kf3FgYLZ3EQ/mqdefault.jpg"},{"id":"uzsong18","ch":"YouTube","t":"Elmurod Ziyoyev va boshqalar — Dilozor","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=i4wn8Jr5Ifg","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/i4wn8Jr5Ifg/mqdefault.jpg"},{"id":"uzsong19","ch":"YouTube","t":"Yulduz Usmonova — Onamga aytmang","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=PP2sy7bc5qo","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/PP2sy7bc5qo/mqdefault.jpg"},{"id":"uzsong20","ch":"YouTube","t":"G'aybulla Tursunov — Quralay","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=Qzhfa3_aEBM","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/Qzhfa3_aEBM/mqdefault.jpg"},{"id":"uzsong21","ch":"YouTube","t":"Sevinch Ismoilova — Gitarist","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=q5X7m00-_bk","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/q5X7m00-_bk/mqdefault.jpg"},{"id":"uzsong22","ch":"YouTube","t":"Ozoda Nursaidova & Tolib Musofir — Oshiqlar","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=DRBCwln8UE8","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/DRBCwln8UE8/mqdefault.jpg"},{"id":"uzsong23","ch":"YouTube","t":"Dilnoz — Devona","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=6euli5qbvjM","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/6euli5qbvjM/mqdefault.jpg"},{"id":"uzsong24","ch":"YouTube","t":"Yorqinxo'ja Umarov — Million","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=NKwcThK3rkk","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/NKwcThK3rkk/mqdefault.jpg"},{"id":"uzsong25","ch":"YouTube","t":"Yulduz Turdiyeva — Bizning sevgimiz boshqacha","d":"O'zbek musiqasi — YouTube klipi","u":"https://www.youtube.com/watch?v=SuGzm4-aNhY","tp":"musiqa","c":"O'zbek kliplari","th":"https://i.ytimg.com/vi/SuGzm4-aNhY/mqdefault.jpg"},{"id":"uzsearch26","ch":"YouTube qidiruv","t":"Shahzoda — Chicco","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Shahzoda+—+Chicco","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch27","ch":"YouTube qidiruv","t":"Sunnatillo Do'stov — Alyonushka (boshqa ijro)","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Sunnatillo+Do'stov+—+Alyonushka+(boshqa+ijro)","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch28","ch":"YouTube qidiruv","t":"Munisa Rizayeva — Aka makasi","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Munisa+Rizayeva+—+Aka+makasi","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch29","ch":"YouTube qidiruv","t":"Zarifjon Safarov — Laylijon","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Zarifjon+Safarov+—+Laylijon","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch30","ch":"YouTube qidiruv","t":"Mashhur Muhammad — Pul","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Mashhur+Muhammad+—+Pul","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch31","ch":"YouTube qidiruv","t":"Ulug'bek Rahmatullayev — Sog'inaman","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Ulug'bek+Rahmatullayev+—+Sog'inaman","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch32","ch":"YouTube qidiruv","t":"Janob Rasul — Yomonsan","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Janob+Rasul+—+Yomonsan","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch33","ch":"YouTube qidiruv","t":"Ulug'bek Rahmatullayev — Яблоко любви","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Ulug'bek+Rahmatullayev+—+Яблоко+любви","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch34","ch":"YouTube qidiruv","t":"Shoxruxbek Ergashev — To'yiga borib kelamiz","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Shoxruxbek+Ergashev+—+To'yiga+borib+kelamiz","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch35","ch":"YouTube qidiruv","t":"Asilbek Amanulloh — Oppoq aka","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Asilbek+Amanulloh+—+Oppoq+aka","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch36","ch":"YouTube qidiruv","t":"Yulduz Usmonova — Bor bor dema","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Yulduz+Usmonova+—+Bor+bor+dema","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch37","ch":"YouTube qidiruv","t":"Munisa Rizayeva — Hafa hafa","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Munisa+Rizayeva+—+Hafa+hafa","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch38","ch":"YouTube qidiruv","t":"Sardor Tairov — Sen meni yeding","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Sardor+Tairov+—+Sen+meni+yeding","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch39","ch":"YouTube qidiruv","t":"Yulduz Turdiyeva — Bizni sevgimiz boshqacha","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Yulduz+Turdiyeva+—+Bizni+sevgimiz+boshqacha","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch40","ch":"YouTube qidiruv","t":"Sevinch Mo'minova — Ko'ylagim","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Sevinch+Mo'minova+—+Ko'ylagim","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch41","ch":"YouTube qidiruv","t":"Botir Qodirov — Nima bo'ldi","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Botir+Qodirov+—+Nima+bo'ldi","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch42","ch":"YouTube qidiruv","t":"Rayhon — Izlama","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Rayhon+—+Izlama","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch43","ch":"YouTube qidiruv","t":"Shohrux & Madlen — Dona","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Shohrux+&+Madlen+—+Dona","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch44","ch":"YouTube qidiruv","t":"Yulduz Usmonova — Saney","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Yulduz+Usmonova+—+Saney","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch45","ch":"YouTube qidiruv","t":"Nilufar Usmonova — Ishq","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Nilufar+Usmonova+—+Ishq","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch46","ch":"YouTube qidiruv","t":"Ummon — Yomg'ir","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Ummon+—+Yomg'ir","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch47","ch":"YouTube qidiruv","t":"Bojalar — Chikita","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Bojalar+—+Chikita","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch48","ch":"YouTube qidiruv","t":"Ozoda Nursaidova — Ko'k jiguli","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Ozoda+Nursaidova+—+Ko'k+jiguli","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch49","ch":"YouTube qidiruv","t":"Jahongir Otajonov — Qizg'aldog'im","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Jahongir+Otajonov+—+Qizg'aldog'im","tp":"musiqa","c":"O'zbek kliplari"},{"id":"uzsearch50","ch":"YouTube qidiruv","t":"Sardor Rahimxon — Hayot","d":"YouTube'da klipni ochish uchun kartani bosing.","u":"https://www.youtube.com/results?search_query=Sardor+Rahimxon+—+Hayot","tp":"musiqa","c":"O'zbek kliplari"},{"id":"fun01","ch":"YouTube qidiruv","t":"Koinotning hayratlanarli sirlari","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=space+documentary+amazing+facts","tp":"video","c":"Qiziqarli"},{"id":"fun02","ch":"YouTube qidiruv","t":"Dengiz tubidagi g'aroyibotlar","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=deep+ocean+strange+creatures+documentary","tp":"video","c":"Qiziqarli"},{"id":"fun03","ch":"YouTube qidiruv","t":"Dinozavrlar haqida qiziqarli faktlar","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=dinosaur+facts+documentary","tp":"video","c":"Qiziqarli"},{"id":"fun04","ch":"YouTube qidiruv","t":"Yer sayyorasining eng sirli joylari","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=mysterious+places+on+Earth+documentary","tp":"video","c":"Qiziqarli"},{"id":"fun05","ch":"YouTube qidiruv","t":"Robotlar va sun'iy intellekt","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=robots+artificial+intelligence+interesting+video","tp":"video","c":"Qiziqarli"},{"id":"fun06","ch":"YouTube qidiruv","t":"Dunyoning eng baland binolari","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=world+tallest+buildings+documentary","tp":"video","c":"Qiziqarli"},{"id":"fun07","ch":"YouTube qidiruv","t":"Hayvonot olamidagi noodatiy hodisalar","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=amazing+animal+facts+documentary","tp":"video","c":"Qiziqarli"},{"id":"fun08","ch":"YouTube qidiruv","t":"Odam miyasi qanday ishlaydi?","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=how+the+human+brain+works+documentary","tp":"video","c":"Qiziqarli"},{"id":"fun09","ch":"YouTube qidiruv","t":"Mars va boshqa sayyoralar","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=Mars+planet+documentary+NASA","tp":"video","c":"Qiziqarli"},{"id":"fun10","ch":"YouTube qidiruv","t":"Eng katta muhandislik loyihalari","d":"Qiziqarli videolar: YouTube qidiruv natijalari.","u":"https://www.youtube.com/results?search_query=world+biggest+engineering+projects+documentary","tp":"video","c":"Qiziqarli"}];
+var S={urls:{},favs:{},custom:[],vids:[]},tab="kino",flt=null,cur=null,hls=null,dash=null,subOn=false,dual=false,size=1.05,cues=[],q="",cat="",page=1,PS=24,ccx=$("cc"),v=$("v");
+try{var raw=localStorage.getItem("dtv");if(raw){var o=JSON.parse(raw);S.urls=o.urls||{};S.favs=o.favs||{};S.custom=o.custom||[];S.vids=o.vids||[]}}catch(e){}
 function store(){try{localStorage.setItem("dtv",JSON.stringify(S))}catch(e){}}
-function all(){return DEF.map(function(c){return {id:c.id,n:c.n,c:c.c,t:c.t,u:S.urls[c.id]!==undefined?S.urls[c.id]:c.u,cu:false}}).concat(S.custom.map(function(c){return {id:c.id,n:c.n,c:"Mening kanalim",t:c.t,u:S.urls[c.id]!==undefined?S.urls[c.id]:c.u,cu:true}}))}
+function hh(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return Math.abs(h).toString(36)}
+function allV(){return CAT.concat(S.vids).map(function(x){var y={id:x.id||"v"+hh((x.u||"")+(x.t||"")),t:x.t||"Nomsiz",d:x.d||"",u:x.u||"",tp:x.tp||"video",c:x.c||"Boshqa",th:x.th||"",ch:x.ch||"",mine:S.vids.indexOf(x)>-1};return y})}
+fetch("videos.json?"+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(j){if(Array.isArray(j)&&j.length){CAT=j;render()}}).catch(function(){});
+function allC(){return DEF.map(function(c){return {id:c.id,n:c.n,c:c.c,t:c.t,u:S.urls[c.id]!==undefined?S.urls[c.id]:c.u,cu:false}}).concat(S.custom.map(function(c){return {id:c.id,n:c.n,c:"Mening kanalim",t:c.t,u:S.urls[c.id]!==undefined?S.urls[c.id]:c.u,cu:true}}))}
 function msg(t,e){$("st").textContent=t;$("st").className=e?"err":""}
-function pick(c){cur=c;$("url").value=c.u||"";$("ph").textContent=c.n;$("ph").style.display="flex";if(c.u){load(c.u)}else{msg("Bu kanal uchun havola yo'q. Havolani yuqoridagi maydonga qo'ying, Ijro etish, so'ng Havolani saqlash.",1);stop()}render()}
-function stop(){if(hls){hls.destroy();hls=null}if(dash){try{dash.reset()}catch(e){}dash=null}hideEmb();v.removeAttribute("src");v.load()}
-var dash=null;
+function pick(c){cur=c;$("url").value=c.u||"";$("ph").textContent=c.n;$("ph").style.display="flex";$("pd").innerHTML="";var b=document.createElement("b");b.textContent=c.n;$("pd").appendChild(b);$("pd").appendChild(document.createTextNode(c.d||c.c||""));
+ $("box").scrollIntoView({behavior:"smooth",block:"start"});
+ if(c.u){load(c.u)}else{msg("Bu uchun havola yo'q. Havolani yuqoridagi maydonga qo'ying, Ijro etish, so'ng Havolani saqlash.",1);stop()}render()}
 function hideEmb(){var e=$("emb");e.style.display="none";e.removeAttribute("src")}
+function stop(){if(hls){hls.destroy();hls=null}if(dash){try{dash.reset()}catch(e){}dash=null}hideEmb();v.removeAttribute("src");v.load()}
 function ytId(u){var m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|live\/|shorts\/))([\w-]{11})/);return m?m[1]:null}
-function emb(src){v.pause();var e=$("emb");e.src=src;e.style.display="block";$("ph").style.display="none";msg("Tashqi pleyerda ochildi. Bu rejimda subtitr videoga bog'lanmaydi.")}
+function emb(src){v.pause();var e=$("emb");e.src=src;e.style.display="block";$("ph").style.display="none";msg("Video Dunyo TV sahifasi ichida ijro etilmoqda. YouTube oynasi sayt ichida ko'rinadi.")}
 function load(u){
  if(hls){hls.destroy();hls=null}
  if(dash){try{dash.reset()}catch(e){}dash=null}
  hideEmb();v.onerror=null;v.onloadeddata=null;
  if(!u){msg("Avval havolani kiriting.",1);return}
+  if(/youtube\\.com\\/results\\?search_query=/i.test(u)){window.open(u,"_blank","noopener");msg("YouTube qidiruv natijalari yangi oynada ochildi.");return}
  if(/^(rtmp|rtsp|udp|rtp|mms):/i.test(u)){msg("Brauzer bu turdagi havolani (rtmp, rtsp, udp) ijro eta olmaydi. HLS (.m3u8) yoki .mp4 kerak.",1);return}
  if(/^http:\/\//i.test(u)){msg("Havola http:// bilan boshlanadi, sayt https bo'lgani uchun brauzer uni bloklaydi.",1);return}
  if(!/^https:\/\//i.test(u)){msg("Havola https:// bilan boshlanishi kerak.",1);return}
- var y=ytId(u),yc=u.match(/youtube\.com\/channel\/(UC[\w-]+)/),vm=u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
- if(y){emb("https://www.youtube.com/embed/"+y+"?autoplay=1");return}
+ var y=ytId(u),pl=u.match(/[?&]list=([\w-]+)/),yc=u.match(/youtube\.com\/channel\/(UC[\w-]+)/),vm=u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+ if(y){emb("https://www.youtube.com/embed/"+y+"?autoplay=1"+(pl?"&list="+pl[1]:""));return}
+ if(pl&&/youtube\.com/.test(u)){emb("https://www.youtube.com/embed/videoseries?list="+pl[1]+"&autoplay=1");return}
  if(yc){emb("https://www.youtube.com/embed/live_stream?channel="+yc[1]+"&autoplay=1");return}
  if(vm){emb("https://player.vimeo.com/video/"+vm[1]+"?autoplay=1");return}
  msg("Yuklanmoqda...");
@@ -154,35 +203,63 @@ function load(u){
 var G=[["#1D2F8F","#0B1230"],["#0E8F86","#0B1B3A"],["#6B2FA0","#1B1250"],["#B5551A","#3A1230"],["#1D6FA8","#0B1B3A"],["#8A1F4B","#240B2E"]];
 var FL={sinov:"🎬",film4:"🇬🇧",arte:"🇫🇷",raimovie:"🇮🇹",kabeleins:"🇩🇪",tele5:"🇩🇪",skysports:"🇬🇧",tntsports:"🇬🇧",dazn:"🇪🇺",canalbein:"🇫🇷",movistar:"🇪🇸"};
 function gi(id){var h=0;for(var i=0;i<id.length;i++)h=(h*31+id.charCodeAt(i))%6;return h}
+function grad(id){var g=G[gi(id)];return "linear-gradient(155deg,"+g[0]+","+g[1]+")"}
+function starBtn(id){var s=document.createElement("button");s.className="star"+(S.favs[id]?" on":"");s.textContent=S.favs[id]?"\u2605":"\u2606";s.setAttribute("aria-label","Sevimlilarga qo'shish");s.onclick=function(e){e.stopPropagation();S.favs[id]=!S.favs[id];store();render()};return s}
 function item(c){
- var w=document.createElement("div");w.className="tile"+(cur&&cur.id===c.id?" cur":"");
- var g=G[gi(c.id)];w.style.background="linear-gradient(155deg,"+g[0]+","+g[1]+")";
+ var w=document.createElement("div");w.className="tile"+(cur&&cur.id===c.id?" cur":"");w.style.background=grad(c.id);
  var b=document.createElement("button");b.className="tb";
  b.innerHTML='<span class="fl">'+(FL[c.id]||"📺")+'</span><span class="meta"><b></b><i></i><em class="chip'+(c.u?" on":"")+'">'+(cur&&cur.id===c.id?"\u25CF Tanlangan":(c.u?"\u25B6 Havola bor":"Havola yo'q"))+'</em></span>';
  b.querySelector("b").textContent=c.n;b.querySelector("i").textContent=c.c;
- b.onclick=function(){pick(c)};
- w.appendChild(b);
- var s=document.createElement("button");s.className="star"+(S.favs[c.id]?" on":"");s.textContent=S.favs[c.id]?"\u2605":"\u2606";s.setAttribute("aria-label","Sevimlilarga qo'shish");
- s.onclick=function(){S.favs[c.id]=!S.favs[c.id];store();render()};w.appendChild(s);
- if(c.cu){var x=document.createElement("button");x.className="del";x.textContent="\u2715";x.setAttribute("aria-label","O'chirish");x.onclick=function(){S.custom=S.custom.filter(function(q){return q.id!==c.id});delete S.favs[c.id];delete S.urls[c.id];store();render()};w.appendChild(x)}
+ b.onclick=function(){pick(c)};w.appendChild(b);w.appendChild(starBtn(c.id));
+ if(c.cu){var x=document.createElement("button");x.className="del";x.textContent="\u2715";x.setAttribute("aria-label","O'chirish");x.onclick=function(){S.custom=S.custom.filter(function(z){return z.id!==c.id});delete S.favs[c.id];delete S.urls[c.id];store();render()};w.appendChild(x)}
  return w
+}
+function vcard(x){
+ var w=document.createElement("div");w.className="vc"+(cur&&cur.id===x.id?" cur":"");
+ var po=document.createElement("button");po.className="po";po.style.background=grad(x.id);if(x.th){po.style.background="#000 url('"+x.th+"') center/cover";po.textContent=""}else po.textContent=x.tp==="musiqa"?"🎵":"🎬";po.setAttribute("aria-label",x.t+" ni ochish");
+ var bd=document.createElement("div");bd.className="bd";var h=document.createElement("h3");h.textContent=x.t;var p=document.createElement("p");p.textContent=x.d||"Tavsif kiritilmagan.";var sm=document.createElement("small");sm.textContent=x.c;
+ bd.appendChild(h);bd.appendChild(p);bd.appendChild(sm);if(x.ch){var cr=document.createElement("div");cr.className="cr";cr.textContent="Kanal: "+x.ch;bd.appendChild(cr)}
+ var open=function(){pick({id:x.id,n:x.t,u:x.u,d:x.d})};po.onclick=open;bd.onclick=open;
+ var rc=document.createElement("span");rc.className="rec";rc.textContent="Dunyo TV tavsiyasi";w.appendChild(po);w.appendChild(bd);w.appendChild(rc);w.appendChild(starBtn(x.id));
+ if(x.mine){var d=document.createElement("button");d.className="del";d.textContent="\u2715";d.setAttribute("aria-label","O'chirish");d.onclick=function(e){e.stopPropagation();S.vids=S.vids.filter(function(z){return (z.id||"v"+hh((z.u||"")+(z.t||"")))!==x.id});delete S.favs[x.id];store();render()};w.appendChild(d)}
+ return w
+}
+function renderVids(kind,L){
+ var A=allV().filter(function(x){return x.tp===kind});
+ var cats=[];A.forEach(function(x){if(cats.indexOf(x.c)<0)cats.push(x.c)});
+ var ch=$("chips");ch.innerHTML="";
+ ["Hammasi"].concat(cats).forEach(function(n){var b=document.createElement("button");b.textContent=n;if((n==="Hammasi"&&!cat)||n===cat)b.className="on";b.onclick=function(){cat=n==="Hammasi"?"":n;page=1;render()};ch.appendChild(b)});
+ var f=A.filter(function(x){var s=(x.t+" "+x.d+" "+x.c).toLowerCase();return (!cat||x.c===cat)&&(!q||s.indexOf(q)>-1)});
+ $("ttl").textContent=(kind==="musiqa"?"Musiqa":"Videolar")+" ("+f.length+")";
+ L.className="grid v";
+ if(!f.length){var e=document.createElement("p");e.className="note";e.style.gridColumn="1/-1";e.textContent=A.length?"Hech narsa topilmadi.":(kind==="musiqa"?"Hali musiqa yo'q. Pastdagi \"Video va musiqa qo'shish\" bo'limidan YouTube pleylist havolasini qo'shing: bitta pleylistda 30 va undan ko'p video bo'lishi mumkin.":"Hali video yo'q.");L.appendChild(e);return}
+ f.slice(0,page*PS).forEach(function(x){L.appendChild(vcard(x))});
+ if(f.length>page*PS){var m=document.createElement("button");m.className="btn";m.style.gridColumn="1/-1";m.textContent="Yana ko'rsatish ("+(f.length-page*PS)+" ta qoldi)";m.onclick=function(){page++;render()};L.appendChild(m)}
 }
 function render(){
  var L=$("list");L.innerHTML="";L.className="grid";var T={kino:"Kino kanallari",futbol:"Futbol kanallari",top:"To'plamlar",sev:"Sevimlilar"};
- var A=all(),it;
+ var isV=(tab==="vid"||tab==="mus");$("tools").style.display=isV?"block":"none";
+ if(isV){renderVids(tab==="mus"?"musiqa":"video",L);return}
+ var A=allC(),it;
  if(flt){var bk=document.createElement("button");bk.className="btn";bk.style.gridColumn="1/-1";bk.textContent="\u2039 Barcha to'plamlar";bk.onclick=function(){flt=null;render()};L.appendChild(bk)}
- if(tab==="top"&&!flt){$("ttl").textContent=T.top;var E=["🎞️","💥","🗣️","⚽"];COLS.forEach(function(c,i){var w=document.createElement("div");w.className="tile";var g=G[i+1];w.style.background="linear-gradient(155deg,"+g[0]+","+g[1]+")";var b=document.createElement("button");b.className="tb";b.innerHTML='<span class="fl">'+E[i]+'</span><span class="meta"><b></b><i></i></span>';b.querySelector("b").textContent=c.t;b.querySelector("i").textContent=c.d+" \u00b7 "+c.l.length+" kanal";b.onclick=function(){flt=c.l;render()};w.appendChild(b);L.appendChild(w)});return}
- if(tab==="sev")it=A.filter(function(c){return S.favs[c.id]});
+ if(tab==="top"&&!flt){$("ttl").textContent=T.top;var E=["🎞️","💥","🗣️","⚽"];COLS.forEach(function(c,i){var w=document.createElement("div");w.className="tile";w.style.background=grad("col"+i);var b=document.createElement("button");b.className="tb";b.innerHTML='<span class="fl">'+E[i]+'</span><span class="meta"><b></b><i></i></span>';b.querySelector("b").textContent=c.t;b.querySelector("i").textContent=c.d+" \u00b7 "+c.l.length+" kanal";b.onclick=function(){flt=c.l;render()};w.appendChild(b);L.appendChild(w)});return}
+ var vs=[];
+ if(tab==="sev"){it=A.filter(function(c){return S.favs[c.id]});vs=allV().filter(function(x){return S.favs[x.id]})}
  else if(flt)it=A.filter(function(c){return flt.indexOf(c.id)>-1});
  else it=A.filter(function(c){return c.t===tab});
- $("ttl").textContent=T[tab]+" ("+it.length+")";
- if(!it.length){var e=document.createElement("p");e.className="note";e.style.gridColumn="1/-1";e.textContent="Hali sevimli kanal yo'q. Kanal yonidagi yulduzchani bosing.";L.appendChild(e);return}
- it.forEach(function(c){L.appendChild(item(c))})
+ $("ttl").textContent=T[tab]+" ("+(it.length+vs.length)+")";
+ if(!it.length&&!vs.length){var e=document.createElement("p");e.className="note";e.style.gridColumn="1/-1";e.textContent="Hali sevimli yo'q. Yulduzchani bosing.";L.appendChild(e);return}
+ it.forEach(function(c){L.appendChild(item(c))});vs.forEach(function(x){L.appendChild(vcard(x))})
 }
-document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){tab=b.dataset.tab;flt=null;document.querySelectorAll("nav button").forEach(function(x){x.setAttribute("aria-selected",x===b)});render();$("ttl").scrollIntoView({behavior:"smooth",block:"start"})}});
+function setTab(t){tab=t;flt=null;q="";cat="";page=1;$("q").value="";document.querySelectorAll("nav button").forEach(function(x){x.setAttribute("aria-selected",x.dataset.tab===tab)});render()}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){setTab(b.dataset.tab);$("ttl").scrollIntoView({behavior:"smooth",block:"start"})}});
+$("q").oninput=function(){q=this.value.trim().toLowerCase();page=1;render()};
 $("play").onclick=function(){load($("url").value.trim())};
-$("save").onclick=function(){var u=$("url").value.trim();if(!cur){msg("Avval kanalni tanlang.",1);return}S.urls[cur.id]=u;store();cur.u=u;msg("Havola saqlandi.");render()};
-$("addBtn").onclick=function(){var n=$("an").value.trim(),u=$("au").value.trim();if(!n){msg("Kanal nomini kiriting.",1);return}S.custom.push({id:"c"+Date.now(),n:n,u:u,t:$("at").value});store();$("an").value="";$("au").value="";tab=$("at").value;flt=null;document.querySelectorAll("nav button").forEach(function(x){x.setAttribute("aria-selected",x.dataset.tab===tab)});render();msg("Kanal qo'shildi.")};
+$("save").onclick=function(){var u=$("url").value.trim();if(!cur){msg("Avval tanlang.",1);return}S.urls[cur.id]=u;store();cur.u=u;msg("Havola saqlandi.");render()};
+$("addBtn").onclick=function(){var n=$("an").value.trim(),u=$("au").value.trim();if(!n){msg("Kanal nomini kiriting.",1);return}S.custom.push({id:"c"+Date.now(),n:n,u:u,t:$("at").value});store();$("an").value="";$("au").value="";setTab($("at").value);msg("Kanal qo'shildi.")};
+$("vadd").onclick=function(){var t=$("vt").value.trim(),u=$("vu").value.trim();if(!t||!u){msg("Sarlavha va havolani kiriting.",1);return}S.vids.push({t:t,u:u,d:$("vd").value.trim(),tp:$("vp").value,c:$("vc").value.trim()||"Boshqa"});store();var tp=$("vp").value;$("vt").value="";$("vu").value="";$("vd").value="";setTab(tp==="musiqa"?"mus":"vid");msg("Qo'shildi.")};
+$("bulkBtn").onclick=function(){var n=0;$("bulk").value.split("\n").forEach(function(l){var p=l.split("|").map(function(z){return z.trim()});if(p.length>=2&&p[0]&&/^https?:\/\//i.test(p[1])){S.vids.push({t:p[0],u:p[1],d:p[2]||"",tp:/musiq/i.test(p[3]||"")?"musiqa":"video",c:p[4]||"Boshqa"});n++}});if(n){store();$("bulk").value="";setTab("vid")}msg(n?n+" ta qo'shildi.":"Hech narsa qo'shilmadi. Format: Sarlavha | havola | tavsif | video yoki musiqa | kategoriya",!n)};
+$("exp").onclick=function(){var j=JSON.stringify(allV().map(function(x){return {id:x.id,t:x.t,d:x.d,u:x.u,tp:x.tp,c:x.c,th:x.th,ch:x.ch}}),null,1);var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([j],{type:"application/json"}));a.download="videos.json";document.body.appendChild(a);a.click();a.remove();msg("videos.json yuklandi. Uni GitHub'ga shu nom bilan yuklang.")};
 function parse(){cues=[];$("subs").value.split("\n").forEach(function(l){var p=l.split("|");if(p.length>=2&&!isNaN(parseFloat(p[0])))cues.push({t:parseFloat(p[0]),a:p[1].trim(),b:(p[2]||"").trim()})});cues.sort(function(a,b){return a.t-b.t})}
 function show(){if(!subOn){ccx.style.display="none";return}var t=v.currentTime,c=null;for(var i=0;i<cues.length;i++){if(cues[i].t<=t)c=cues[i]}if(c){ccx.textContent=c.a;if(dual&&c.b){var r=document.createElement("div");r.style.opacity=".75";r.textContent=c.b;ccx.appendChild(r)}ccx.style.display="block"}else ccx.style.display="none"}
 $("subBtn").onclick=function(){subOn=!subOn;this.setAttribute("aria-pressed",subOn);parse();show()};
@@ -191,9 +268,27 @@ $("subs").oninput=function(){parse();show()};
 $("sm").onclick=function(){size=Math.max(.8,size-.1);ccx.style.fontSize=size+"rem"};
 $("lg").onclick=function(){size=Math.min(2,size+.1);ccx.style.fontSize=size+"rem"};
 v.addEventListener("timeupdate",show);v.addEventListener("seeked",show);
-$("shBtn").onclick=function(){var t=cur?cur.n+" kanalini o'zbekcha subtitr bilan ko'ring":"Dunyo TV o'zbekcha";try{if(navigator.share){navigator.share({title:"Dunyo TV",text:t,url:location.href});return}}catch(e){}try{navigator.clipboard.writeText(t+" "+location.href);this.textContent="Nusxalandi"}catch(e){this.textContent="Ulashib bo'lmadi"}};
+$("shBtn").onclick=function(){var t=cur?cur.n+" ni o'zbekcha subtitr bilan ko'ring":"Dunyo TV o'zbekcha";try{if(navigator.share){navigator.share({title:"Dunyo TV",text:t,url:location.href});return}}catch(e){}try{navigator.clipboard.writeText(t+" "+location.href);this.textContent="Nusxalandi"}catch(e){this.textContent="Ulashib bo'lmadi"}};
 ["tgBtn","regBtn"].forEach(function(id){$(id).onclick=function(){$("authMsg").textContent="Maket: ro'yxatdan o'tish keyingi bosqichda ishlaydi."}});
 $("guestBtn").onclick=function(){this.closest("details").open=false};
+$("ykey").value=S.ykey||"";
+function dec(t){var e=document.createElement("textarea");e.innerHTML=t;return e.value}
+$("ygo").onclick=function(){
+ var key=$("ykey").value.trim(),qq=$("yq").value.trim(),tp=$("yp").value,cc=$("yc").value.trim()||"YouTube",n=parseInt($("yn").value,10)||50;
+ if(!key||!qq){msg("API kalit va qidiruv so'zini kiriting.",1);return}
+ S.ykey=key;store();var have={};allV().forEach(function(x){have[x.u]=1});var added=0,tok="";
+ msg("YouTube'dan qidirilmoqda...");
+ (function next(){
+  var u="https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&videoSyndicated=true&maxResults=50&q="+encodeURIComponent(qq)+"&key="+encodeURIComponent(key)+(tok?"&pageToken="+tok:"");
+  fetch(u).then(function(r){return r.json()}).then(function(j){
+   if(j.error){msg("YouTube xatosi: "+(j.error.message||"noma'lum")+" (kalit to'g'rimi va YouTube Data API v3 yoqilganmi?)",1);return}
+   (j.items||[]).forEach(function(it){var id=it.id&&it.id.videoId;if(!id)return;var link="https://www.youtube.com/watch?v="+id;if(have[link]||added>=n)return;have[link]=1;
+    S.vids.push({id:"y"+id,t:dec(it.snippet.title),d:dec(it.snippet.description||"").slice(0,220),u:link,tp:tp,c:cc,th:"https://i.ytimg.com/vi/"+id+"/mqdefault.jpg",ch:dec(it.snippet.channelTitle||"")});added++});
+   store();
+   if(added<n&&j.nextPageToken){tok=j.nextPageToken;next()}else{msg(added+" ta video qo'shildi.");setTab(tp==="musiqa"?"mus":"vid")}
+  }).catch(function(){msg("YouTube bilan ulanib bo'lmadi. Internetni va kalitni tekshiring.",1)})
+ })()
+};
 parse();render();
 </script>
 </body>
