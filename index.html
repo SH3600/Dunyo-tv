@@ -4,101 +4,197 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="description" content="Dunyo TV: xorijiy telekanallar o'zbekcha subtitr bilan. Test rejimi.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dunyo TV o'zbekcha — test rejimi</title>
 <style>
-:root{--bg:#101B4B;--card:#1D2F8F;--ink:#EDF0FF;--mute:#A9B4E0;--gold:#F2B544;--teal:#2EC4B6;--line:#3A4BA8}
+:root{--bg:#0B1230;--s1:#141D4A;--s2:#1E2A66;--ink:#EEF1FF;--mute:#9AA6D6;--line:#2B3A82;--gold:#F2B544;--teal:#2EC4B6;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
-main{max-width:860px;margin:0 auto;padding:16px}
-h1{font-size:1.5rem;margin:8px 0 2px}
-.sub{color:var(--mute);margin:0 0 16px;font-size:.92rem}
-.badge{display:inline-block;background:var(--gold);color:#2b1c00;font-weight:800;font-size:.75rem;padding:3px 8px;border-radius:6px;margin-left:8px;vertical-align:middle}
-.box{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line)}
-video{width:100%;height:100%;display:block;background:#000}
-#cc{position:absolute;left:6%;right:6%;bottom:56px;text-align:center;color:#fff;background:rgba(0,0,0,.72);padding:6px 12px;border-radius:6px;font-size:1.1rem;display:none;pointer-events:none}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
-textarea{min-height:150px;resize:vertical}
-button{font:inherit;font-weight:600;cursor:pointer;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-height:44px}
-button.pri{background:var(--gold);color:#2b1c00;border-color:var(--gold)}
-button[aria-pressed="true"]{background:var(--teal);color:#06182E;border-color:var(--teal)}
-button:disabled{opacity:.5;cursor:not-allowed}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-label{display:block;font-weight:700;margin:16px 0 6px}
-#st{min-height:1.5em;color:var(--mute);font-size:.9rem}
-#st.err{color:#FFB4B4}
-.note{margin-top:16px;padding:12px;border:1px dashed var(--line);border-radius:10px;color:var(--mute);font-size:.85rem}
+body{margin:0;background:radial-gradient(900px 500px at 100% -10%,#1B2A78 0,transparent 60%),var(--bg);color:var(--ink);font-family:Manrope,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
+main{max-width:760px;margin:0 auto;padding:16px 16px 130px}
+h1{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:6px 0 2px}.sub{color:var(--mute);margin:0 0 14px;font-size:.92rem}
+.badge{background:var(--gold);color:#2b1c00;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:99px;margin-left:8px;vertical-align:middle}
+.box{position:relative;background:#000;border-radius:20px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);box-shadow:0 12px 32px rgba(0,0,0,.45)}
+video{width:100%;height:100%;display:block}
+#ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.1rem;text-align:center;padding:0 12px;pointer-events:none;background:repeating-linear-gradient(135deg,#0B1230 0 22px,#101A44 22px 44px)}
+#cc{position:absolute;left:6%;right:6%;bottom:52px;text-align:center;color:#fff;background:rgba(0,0,0,.72);padding:6px 12px;border-radius:8px;font-size:1.05rem;display:none;pointer-events:none}
+#st{min-height:1.5em;margin:10px 0;color:var(--mute);font-size:.9rem}#st.err{color:#FF8A80}
+button,input,select,textarea{font:inherit;color:var(--ink)}button{cursor:pointer}
+.btn{border:0;background:var(--s2);padding:10px 16px;border-radius:999px;font-weight:700;min-height:44px}
+.btn.pri{background:var(--gold);color:#2b1c00}
+.btn[aria-pressed="true"]{background:var(--teal);color:#06182E}
+.seg{display:inline-flex;background:var(--s2);border-radius:999px}.seg .btn{background:none}
+.cc{background:var(--ink);color:var(--bg);border-radius:4px;padding:0 5px;font-size:.7rem;font-weight:800;margin-right:6px}
+.row2{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.inp{width:100%;min-height:46px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--s1)}
+textarea.inp{min-height:130px}
+details{margin:0 0 12px}summary{cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-weight:700;min-height:48px;list-style:none}
+summary::-webkit-details-marker{display:none}details[open] summary{border-color:var(--teal)}
+.af{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.ttl{font-size:1.25rem;font-weight:800;margin:22px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+.tile{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.tile::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 18px,rgba(255,255,255,.06) 18px 36px)}
+.tile.cur{outline:3px solid var(--gold);outline-offset:-3px}
+.tb{position:absolute;inset:0;width:100%;display:flex;flex-direction:column;justify-content:space-between;padding:14px;background:none;border:0;color:#fff;text-align:left}
+.fl{font-size:2.8rem;line-height:1}
+.meta{display:flex;flex-direction:column;gap:2px;margin:-14px;padding:34px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.72))}
+.meta b{font-size:1.05rem;line-height:1.2}.meta i{font-style:normal;font-size:.8rem;opacity:.85}
+.chip{align-self:flex-start;margin-top:6px;font-size:.72rem;font-weight:700;font-style:normal;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.2)}.chip.on{background:var(--gold);color:#2b1c00}
+.star,.del{position:absolute;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.4);color:#fff;font-size:1.25rem;display:grid;place-items:center;z-index:2}
+.star{top:10px}.del{top:58px;font-size:1rem}.star.on{color:var(--gold)}
+.note{padding:12px 14px;border:1px dashed var(--line);border-radius:14px;color:var(--mute);font-size:.84rem;margin-top:14px}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px;background:rgba(20,29,74,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+nav button{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;border-radius:18px;padding:8px 2px;min-height:58px;color:var(--mute);font-size:.72rem;font-weight:700}
+nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected="true"]{background:rgba(242,181,68,.16);color:var(--gold)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </style>
 </head>
 <body>
 <main>
 <h1>Dunyo TV <span class="badge">Test rejimi</span></h1>
-<p class="sub">Jonli oqim havolasini qo'ying, o'zbekcha subtitr bilan sinab ko'ring.</p>
+<p class="sub">Xorijiy kanallarni o'zbekcha subtitr bilan ko'ring.</p>
 
-<div class="box"><video id="v" controls playsinline></video><div id="cc"></div></div>
+<details class="auth"><summary>Kirish / Ro'yxatdan o'tish</summary><div class="af">
+<button class="btn" id="tgBtn">Telegram orqali kirish</button>
+<input class="inp" type="text" placeholder="Telefon raqam yoki email" aria-label="Telefon raqam yoki email">
+<input class="inp" type="password" placeholder="Parol" aria-label="Parol">
+<button class="btn pri" id="regBtn">Ro'yxatdan o'tish</button>
+<button class="btn" id="guestBtn">Mehmon sifatida davom etish</button>
+<p class="note" id="authMsg" style="margin:0">Maket: kirish keyingi bosqichda ishlaydi.</p></div></details>
+
+<div class="box"><video id="v" controls playsinline></video><iframe id="emb" title="Tashqi pleyer" allow="autoplay; fullscreen; encrypted-media" allowfullscreen style="display:none;position:absolute;inset:0;width:100%;height:100%;border:0;background:#000"></iframe><div id="ph">Kanalni tanlang</div><div id="cc"></div></div>
 <p id="st"></p>
+<input class="inp" type="text" id="url" placeholder="Havola: .m3u8, .mp4, .mpd, YouTube, Vimeo" inputmode="url" aria-label="Kanal havolasi">
+<div class="row2"><button class="btn pri" id="play">▶ Ijro etish</button><button class="btn" id="save">Havolani saqlash</button></div>
 
-<label for="url">Oqim havolasi (.m3u8)</label>
-<input type="text" id="url" placeholder="https://.../playlist.m3u8" inputmode="url">
-<div class="row">
-  <button class="pri" id="play">Ijro etish</button>
-  <button id="demo">Sinov oqimini qo'yish</button>
+<div class="row2">
+<button class="btn" id="subBtn" aria-pressed="false"><b class="cc">CC</b>O'zbekcha subtitr</button>
+<button class="btn" id="dualBtn" aria-pressed="false">Ikki tilli subtitr</button>
+<span class="seg"><button class="btn" id="sm" aria-label="Harfni kichraytirish">A−</button><button class="btn" id="lg" aria-label="Harfni kattalashtirish">A+</button></span>
+<button class="btn" id="shBtn">Ulashish</button>
 </div>
+<details><summary>Subtitr matni (soniya | o'zbekcha | asl til)</summary><textarea class="inp" id="subs" spellcheck="false">0 | Dunyo TV sinov rejimiga xush kelibsiz. | Welcome to Dunyo TV test mode.
+5 | Bu subtitr qo'lda kiritilgan namuna. | This subtitle is a manual sample.
+10 | Haqiqiy tarjima keyingi bosqichda avtomatik bo'ladi. | Real translation will be automatic later.
+15 | O'zbek tilida dunyo kanallari bir joyda. | World channels in Uzbek, in one place.</textarea></details>
 
-<label for="subs">O'zbekcha subtitr (soniya | matn)</label>
-<textarea id="subs" spellcheck="false">0 | Dunyo TV sinov rejimiga xush kelibsiz.
-5 | Bu subtitr qo'lda kiritilgan namuna.
-10 | Haqiqiy tarjima keyingi bosqichda avtomatik bo'ladi.
-15 | O'zbek tilida dunyo kanallari bir joyda.</textarea>
-<div class="row">
-  <button id="subBtn" aria-pressed="false">Subtitrni yoqish</button>
-  <button id="sm" aria-label="Harfni kichraytirish">A−</button>
-  <button id="lg" aria-label="Harfni kattalashtirish">A+</button>
-  <button id="auto" disabled title="Keyingi bosqichda serverda ishlaydi">Avto-tarjima (tez orada)</button>
-</div>
+<h2 class="ttl" id="ttl"></h2>
+<div id="list"></div>
 
-<p class="note">Bu test sahifasi. Subtitr hozircha qo'lda yoziladi, avtomatik ovozni tanish va tarjima serverda ishlaydi va keyingi bosqichda qo'shiladi. Ba'zi kanallar boshqa saytlarda ijro etilishini taqiqlaydi (CORS), unda "Oqim ochilmadi" xabari chiqadi. Sahifa internet bilan ochilishi kerak. Faqat o'zingiz ko'rishga haqli oqimlardan foydalaning.</p>
+<details><summary>+ Yangi kanal qo'shish</summary><div class="af">
+<input class="inp" type="text" id="an" placeholder="Kanal nomi" aria-label="Kanal nomi">
+<input class="inp" type="text" id="au" placeholder="Havola (.m3u8)" inputmode="url" aria-label="Kanal havolasi">
+<select class="inp" id="at" aria-label="Bo'lim"><option value="kino">Kino</option><option value="futbol">Futbol</option></select>
+<button class="btn pri" id="addBtn">Qo'shish</button></div></details>
+
+<p class="note">Bu test sahifasi. Kanallar va havolalar faqat shu brauzerda saqlanadi. Havola turlari: .m3u8 (HLS), .mp4/.webm, .mpd (DASH), YouTube va Vimeo. rtmp/rtsp va DRM bilan himoyalangan oqimlar ochilmaydi. Ba'zi kanallar boshqa saytda ijro etilishini taqiqlaydi (CORS) yoki hudud bilan cheklangan. Futbol kanallari pullik va rasmiy ruxsat talab qiladi. Faqat ko'rishga haqli oqimlardan foydalaning.</p>
 </main>
+<nav aria-label="Bo'limlar"><button data-tab="kino" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v4M13 5v4M18 5v4"/></svg><span>Kino</span></button><button data-tab="futbol" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.4 2.5-1.3 4H9.9l-1.3-4zM12 3v5M20.5 9.5l-5.1 1M17 19.5l-2.9-5M7 19.5l2.9-5M3.5 9.5l5.1 1"/></svg><span>Futbol</span></button><button data-tab="top" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>To'plamlar</span></button><button data-tab="sev" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.5 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Sevimlilar</span></button></nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.8/hls.min.js"></script>
 <script>
-var v=document.getElementById("v"),cc=document.getElementById("cc"),st=document.getElementById("st"),hls=null,on=false,size=1.1,cues=[];
-function msg(t,e){st.textContent=t;st.className=e?"err":""}
-function load(){
-  var u=document.getElementById("url").value.trim();
-  if(!u){msg("Avval oqim havolasini kiriting.",1);return}
-  if(hls){hls.destroy();hls=null}
-  msg("Yuklanmoqda...");
+function $(x){return document.getElementById(x)}
+var DEF=[
+{id:"sinov",n:"Sinov oqimi (Big Buck Bunny)",c:"Ochiq animatsiya",t:"kino",u:"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"},
+{id:"film4",n:"Film4",c:"Buyuk Britaniya",t:"kino",u:""},
+{id:"arte",n:"Arte",c:"Fransiya / Germaniya",t:"kino",u:""},
+{id:"raimovie",n:"Rai Movie",c:"Italiya",t:"kino",u:""},
+{id:"kabeleins",n:"Kabel Eins",c:"Germaniya",t:"kino",u:""},
+{id:"tele5",n:"Tele 5",c:"Germaniya",t:"kino",u:""},
+{id:"skysports",n:"Sky Sports",c:"Buyuk Britaniya (pullik)",t:"futbol",u:""},
+{id:"tntsports",n:"TNT Sports",c:"Buyuk Britaniya (pullik)",t:"futbol",u:""},
+{id:"dazn",n:"DAZN",c:"Yevropa (pullik)",t:"futbol",u:""},
+{id:"canalbein",n:"Canal+ / beIN Sports",c:"Fransiya (pullik)",t:"futbol",u:""},
+{id:"movistar",n:"Movistar+",c:"Ispaniya (pullik)",t:"futbol",u:""}];
+var COLS=[{t:"Kino kechasi",d:"Uch mamlakat kinosi",l:["film4","arte","raimovie"]},{t:"Gollivud va fantastika",d:"Ekshn va ilmiy fantastika",l:["film4","kabeleins","tele5"]},{t:"Nemis tilini o'rganish",d:"Ikki tilli subtitr bilan",l:["kabeleins","tele5","arte"]},{t:"Futbol kuni",d:"Rasmiy hamkorlikdan keyin",l:["skysports","tntsports","dazn"]}];
+var S={urls:{},favs:{},custom:[]},tab="kino",flt=null,cur=null,hls=null,subOn=false,dual=false,size=1.05,cues=[],ccx=$("cc"),v=$("v");
+try{var raw=localStorage.getItem("dtv");if(raw){var o=JSON.parse(raw);S.urls=o.urls||{};S.favs=o.favs||{};S.custom=o.custom||[]}}catch(e){}
+function store(){try{localStorage.setItem("dtv",JSON.stringify(S))}catch(e){}}
+function all(){return DEF.map(function(c){return {id:c.id,n:c.n,c:c.c,t:c.t,u:S.urls[c.id]!==undefined?S.urls[c.id]:c.u,cu:false}}).concat(S.custom.map(function(c){return {id:c.id,n:c.n,c:"Mening kanalim",t:c.t,u:S.urls[c.id]!==undefined?S.urls[c.id]:c.u,cu:true}}))}
+function msg(t,e){$("st").textContent=t;$("st").className=e?"err":""}
+function pick(c){cur=c;$("url").value=c.u||"";$("ph").textContent=c.n;$("ph").style.display="flex";if(c.u){load(c.u)}else{msg("Bu kanal uchun havola yo'q. Havolani yuqoridagi maydonga qo'ying, Ijro etish, so'ng Havolani saqlash.",1);stop()}render()}
+function stop(){if(hls){hls.destroy();hls=null}if(dash){try{dash.reset()}catch(e){}dash=null}hideEmb();v.removeAttribute("src");v.load()}
+var dash=null;
+function hideEmb(){var e=$("emb");e.style.display="none";e.removeAttribute("src")}
+function ytId(u){var m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|live\/|shorts\/))([\w-]{11})/);return m?m[1]:null}
+function emb(src){v.pause();var e=$("emb");e.src=src;e.style.display="block";$("ph").style.display="none";msg("Tashqi pleyerda ochildi. Bu rejimda subtitr videoga bog'lanmaydi.")}
+function load(u){
+ if(hls){hls.destroy();hls=null}
+ if(dash){try{dash.reset()}catch(e){}dash=null}
+ hideEmb();v.onerror=null;v.onloadeddata=null;
+ if(!u){msg("Avval havolani kiriting.",1);return}
+ if(/^(rtmp|rtsp|udp|rtp|mms):/i.test(u)){msg("Brauzer bu turdagi havolani (rtmp, rtsp, udp) ijro eta olmaydi. HLS (.m3u8) yoki .mp4 kerak.",1);return}
+ if(/^http:\/\//i.test(u)){msg("Havola http:// bilan boshlanadi, sayt https bo'lgani uchun brauzer uni bloklaydi.",1);return}
+ if(!/^https:\/\//i.test(u)){msg("Havola https:// bilan boshlanishi kerak.",1);return}
+ var y=ytId(u),yc=u.match(/youtube\.com\/channel\/(UC[\w-]+)/),vm=u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+ if(y){emb("https://www.youtube.com/embed/"+y+"?autoplay=1");return}
+ if(yc){emb("https://www.youtube.com/embed/live_stream?channel="+yc[1]+"&autoplay=1");return}
+ if(vm){emb("https://player.vimeo.com/video/"+vm[1]+"?autoplay=1");return}
+ msg("Yuklanmoqda...");
+ var p=u.split("?")[0].toLowerCase();
+ if(/\.mpd$/.test(p)){
+  var go=function(){dash=dashjs.MediaPlayer().create();dash.initialize(v,u,true);$("ph").style.display="none";msg("Oqim ulandi (DASH).")};
+  if(window.dashjs)go();else{var sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.7.4/dash.all.min.js";sc.onload=go;sc.onerror=function(){msg("DASH kutubxonasi yuklanmadi.",1)};document.head.appendChild(sc)}
+  return}
+ if(/\.m3u8$/.test(p)||/m3u8/i.test(u)){
   if(window.Hls&&Hls.isSupported()){
-    hls=new Hls();
-    hls.on(Hls.Events.ERROR,function(e,d){if(d.fatal)msg("Oqim ochilmadi. Havola noto'g'ri yoki kanal ruxsat bermayapti.",1)});
-    hls.on(Hls.Events.MANIFEST_PARSED,function(){msg("Oqim ulandi.");v.play().catch(function(){})});
-    hls.loadSource(u);hls.attachMedia(v);
-  }else if(v.canPlayType("application/vnd.apple.mpegurl")){
-    v.src=u;v.play().catch(function(){});msg("Oqim ulandi.");
-  }else{msg("Bu brauzer HLS oqimini qo'llamaydi. Chrome yoki Safari'dan foydalaning.",1)}
+   hls=new Hls();
+   hls.on(Hls.Events.ERROR,function(e,d){if(d.fatal)msg("Oqim ochilmadi. Havola eskirgan, hudud bilan cheklangan yoki kanal ruxsat bermayapti. Boshqasini sinab ko'ring.",1)});
+   hls.on(Hls.Events.MANIFEST_PARSED,function(){msg("Oqim ulandi.");$("ph").style.display="none";v.play().catch(function(){})});
+   hls.loadSource(u);hls.attachMedia(v);
+  }else if(v.canPlayType("application/vnd.apple.mpegurl")){v.src=u;$("ph").style.display="none";v.play().catch(function(){});msg("Oqim ulandi.")}
+  else msg("Bu brauzer HLS oqimini qo'llamaydi. Chrome yoki Safari'dan foydalaning.",1);
+  return}
+ v.onerror=function(){msg("Havola ochilmadi: bu video fayl emas, eskirgan yoki ruxsat yo'q.",1)};
+ v.onloadeddata=function(){msg("Video ochildi.");$("ph").style.display="none"};
+ v.src=u;v.play().catch(function(){})
 }
-function parse(){
-  cues=[];document.getElementById("subs").value.split("\n").forEach(function(l){
-    var m=l.match(/^\s*(\d+(?:\.\d+)?)\s*\|\s*(.+)$/);if(m)cues.push({t:parseFloat(m[1]),s:m[2]});
-  });
-  cues.sort(function(a,b){return a.t-b.t});
+var G=[["#1D2F8F","#0B1230"],["#0E8F86","#0B1B3A"],["#6B2FA0","#1B1250"],["#B5551A","#3A1230"],["#1D6FA8","#0B1B3A"],["#8A1F4B","#240B2E"]];
+var FL={sinov:"🎬",film4:"🇬🇧",arte:"🇫🇷",raimovie:"🇮🇹",kabeleins:"🇩🇪",tele5:"🇩🇪",skysports:"🇬🇧",tntsports:"🇬🇧",dazn:"🇪🇺",canalbein:"🇫🇷",movistar:"🇪🇸"};
+function gi(id){var h=0;for(var i=0;i<id.length;i++)h=(h*31+id.charCodeAt(i))%6;return h}
+function item(c){
+ var w=document.createElement("div");w.className="tile"+(cur&&cur.id===c.id?" cur":"");
+ var g=G[gi(c.id)];w.style.background="linear-gradient(155deg,"+g[0]+","+g[1]+")";
+ var b=document.createElement("button");b.className="tb";
+ b.innerHTML='<span class="fl">'+(FL[c.id]||"📺")+'</span><span class="meta"><b></b><i></i><em class="chip'+(c.u?" on":"")+'">'+(cur&&cur.id===c.id?"\u25CF Tanlangan":(c.u?"\u25B6 Havola bor":"Havola yo'q"))+'</em></span>';
+ b.querySelector("b").textContent=c.n;b.querySelector("i").textContent=c.c;
+ b.onclick=function(){pick(c)};
+ w.appendChild(b);
+ var s=document.createElement("button");s.className="star"+(S.favs[c.id]?" on":"");s.textContent=S.favs[c.id]?"\u2605":"\u2606";s.setAttribute("aria-label","Sevimlilarga qo'shish");
+ s.onclick=function(){S.favs[c.id]=!S.favs[c.id];store();render()};w.appendChild(s);
+ if(c.cu){var x=document.createElement("button");x.className="del";x.textContent="\u2715";x.setAttribute("aria-label","O'chirish");x.onclick=function(){S.custom=S.custom.filter(function(q){return q.id!==c.id});delete S.favs[c.id];delete S.urls[c.id];store();render()};w.appendChild(x)}
+ return w
 }
-function show(){
-  if(!on){cc.style.display="none";return}
-  var t=v.currentTime,cur=null;
-  for(var i=0;i<cues.length;i++){if(cues[i].t<=t)cur=cues[i]}
-  if(cur){cc.textContent=cur.s;cc.style.display="block"}else cc.style.display="none";
+function render(){
+ var L=$("list");L.innerHTML="";L.className="grid";var T={kino:"Kino kanallari",futbol:"Futbol kanallari",top:"To'plamlar",sev:"Sevimlilar"};
+ var A=all(),it;
+ if(flt){var bk=document.createElement("button");bk.className="btn";bk.style.gridColumn="1/-1";bk.textContent="\u2039 Barcha to'plamlar";bk.onclick=function(){flt=null;render()};L.appendChild(bk)}
+ if(tab==="top"&&!flt){$("ttl").textContent=T.top;var E=["🎞️","💥","🗣️","⚽"];COLS.forEach(function(c,i){var w=document.createElement("div");w.className="tile";var g=G[i+1];w.style.background="linear-gradient(155deg,"+g[0]+","+g[1]+")";var b=document.createElement("button");b.className="tb";b.innerHTML='<span class="fl">'+E[i]+'</span><span class="meta"><b></b><i></i></span>';b.querySelector("b").textContent=c.t;b.querySelector("i").textContent=c.d+" \u00b7 "+c.l.length+" kanal";b.onclick=function(){flt=c.l;render()};w.appendChild(b);L.appendChild(w)});return}
+ if(tab==="sev")it=A.filter(function(c){return S.favs[c.id]});
+ else if(flt)it=A.filter(function(c){return flt.indexOf(c.id)>-1});
+ else it=A.filter(function(c){return c.t===tab});
+ $("ttl").textContent=T[tab]+" ("+it.length+")";
+ if(!it.length){var e=document.createElement("p");e.className="note";e.style.gridColumn="1/-1";e.textContent="Hali sevimli kanal yo'q. Kanal yonidagi yulduzchani bosing.";L.appendChild(e);return}
+ it.forEach(function(c){L.appendChild(item(c))})
 }
-document.getElementById("play").onclick=load;
-document.getElementById("demo").onclick=function(){document.getElementById("url").value="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";msg("Sinov havolasi qo'yildi. Agar ochilmasa, o'zingizniki bilan almashtiring.")};
-document.getElementById("subBtn").onclick=function(){on=!on;this.setAttribute("aria-pressed",on);this.textContent=on?"Subtitr yoqilgan":"Subtitrni yoqish";parse();show()};
-document.getElementById("subs").oninput=function(){parse();show()};
-document.getElementById("sm").onclick=function(){size=Math.max(.8,size-.1);cc.style.fontSize=size+"rem"};
-document.getElementById("lg").onclick=function(){size=Math.min(2,size+.1);cc.style.fontSize=size+"rem"};
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){tab=b.dataset.tab;flt=null;document.querySelectorAll("nav button").forEach(function(x){x.setAttribute("aria-selected",x===b)});render();$("ttl").scrollIntoView({behavior:"smooth",block:"start"})}});
+$("play").onclick=function(){load($("url").value.trim())};
+$("save").onclick=function(){var u=$("url").value.trim();if(!cur){msg("Avval kanalni tanlang.",1);return}S.urls[cur.id]=u;store();cur.u=u;msg("Havola saqlandi.");render()};
+$("addBtn").onclick=function(){var n=$("an").value.trim(),u=$("au").value.trim();if(!n){msg("Kanal nomini kiriting.",1);return}S.custom.push({id:"c"+Date.now(),n:n,u:u,t:$("at").value});store();$("an").value="";$("au").value="";tab=$("at").value;flt=null;document.querySelectorAll("nav button").forEach(function(x){x.setAttribute("aria-selected",x.dataset.tab===tab)});render();msg("Kanal qo'shildi.")};
+function parse(){cues=[];$("subs").value.split("\n").forEach(function(l){var p=l.split("|");if(p.length>=2&&!isNaN(parseFloat(p[0])))cues.push({t:parseFloat(p[0]),a:p[1].trim(),b:(p[2]||"").trim()})});cues.sort(function(a,b){return a.t-b.t})}
+function show(){if(!subOn){ccx.style.display="none";return}var t=v.currentTime,c=null;for(var i=0;i<cues.length;i++){if(cues[i].t<=t)c=cues[i]}if(c){ccx.textContent=c.a;if(dual&&c.b){var r=document.createElement("div");r.style.opacity=".75";r.textContent=c.b;ccx.appendChild(r)}ccx.style.display="block"}else ccx.style.display="none"}
+$("subBtn").onclick=function(){subOn=!subOn;this.setAttribute("aria-pressed",subOn);parse();show()};
+$("dualBtn").onclick=function(){dual=!dual;this.setAttribute("aria-pressed",dual);if(dual&&!subOn){subOn=true;$("subBtn").setAttribute("aria-pressed",true)}parse();show()};
+$("subs").oninput=function(){parse();show()};
+$("sm").onclick=function(){size=Math.max(.8,size-.1);ccx.style.fontSize=size+"rem"};
+$("lg").onclick=function(){size=Math.min(2,size+.1);ccx.style.fontSize=size+"rem"};
 v.addEventListener("timeupdate",show);v.addEventListener("seeked",show);
-parse();
+$("shBtn").onclick=function(){var t=cur?cur.n+" kanalini o'zbekcha subtitr bilan ko'ring":"Dunyo TV o'zbekcha";try{if(navigator.share){navigator.share({title:"Dunyo TV",text:t,url:location.href});return}}catch(e){}try{navigator.clipboard.writeText(t+" "+location.href);this.textContent="Nusxalandi"}catch(e){this.textContent="Ulashib bo'lmadi"}};
+["tgBtn","regBtn"].forEach(function(id){$(id).onclick=function(){$("authMsg").textContent="Maket: ro'yxatdan o'tish keyingi bosqichda ishlaydi."}});
+$("guestBtn").onclick=function(){this.closest("details").open=false};
+parse();render();
 </script>
 </body>
 </html>
