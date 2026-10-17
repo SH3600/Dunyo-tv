@@ -172,7 +172,7 @@ function load(u){
  if(dash){try{dash.reset()}catch(e){}dash=null}
  hideEmb();v.onerror=null;v.onloadeddata=null;
  if(!u){msg("Avval havolani kiriting.",1);return}
-  if(/youtube\\.com\\/results\\?search_query=/i.test(u)){window.open(u,"_blank","noopener");msg("YouTube qidiruv natijalari yangi oynada ochildi.");return}
+  if(/youtube\.com\/results\?search_query=/i.test(u)){window.open(u,"_blank","noopener");msg("YouTube qidiruv natijalari yangi oynada ochildi.");return}
  if(/^(rtmp|rtsp|udp|rtp|mms):/i.test(u)){msg("Brauzer bu turdagi havolani (rtmp, rtsp, udp) ijro eta olmaydi. HLS (.m3u8) yoki .mp4 kerak.",1);return}
  if(/^http:\/\//i.test(u)){msg("Havola http:// bilan boshlanadi, sayt https bo'lgani uchun brauzer uni bloklaydi.",1);return}
  if(!/^https:\/\//i.test(u)){msg("Havola https:// bilan boshlanishi kerak.",1);return}
