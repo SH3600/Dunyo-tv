@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dunyo TV — admin</title>
+<style>
+:root{--bg:#0B1230;--s1:#141D4A;--s2:#1E2A66;--ink:#EEF1FF;--mute:#9AA6D6;--line:#2B3A82;--gold:#F2B544;--teal:#2EC4B6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
+main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:1.5rem;margin:6px 0 12px}
+.badge{background:var(--gold);color:#2b1c00;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:99px;margin-left:8px;vertical-align:middle}
+button,input,select,textarea{font:inherit;color:var(--ink)}button{cursor:pointer}
+.btn{border:0;background:var(--s2);padding:10px 16px;border-radius:999px;font-weight:700;min-height:44px}
+.btn.pri{background:var(--gold);color:#2b1c00}.btn.red{background:#7A1F2B}
+.inp{width:100%;min-height:46px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--s1);margin-bottom:8px}
+textarea.inp{min-height:90px}
+details{margin:0 0 12px}summary{cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-weight:700;min-height:48px;list-style:none}
+summary::-webkit-details-marker{display:none}details[open] summary{border-color:var(--teal)}
+.af{margin-top:8px}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.row{display:flex;gap:10px;align-items:center}
+.row img{width:96px;height:54px;object-fit:cover;border-radius:8px;background:#000;flex:none}
+.row .t{flex:1;min-width:0}.row b{display:block;word-break:break-word}
+.row small{color:var(--mute);display:block;word-break:break-all}
+.acts{display:flex;gap:8px;margin-top:10px}.acts .btn{min-height:40px;padding:6px 14px}
+#msg{min-height:1.5em;margin:10px 0;color:var(--mute)}#msg.err{color:#FF8A80}#msg.ok{color:var(--teal)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;color:var(--mute);font-size:.9rem}
+.note{padding:12px;border:1px dashed var(--line);border-radius:12px;color:var(--mute);font-size:.84rem}
+[hidden]{display:none!important}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>Dunyo TV <span class="badge">Admin</span></h1>
+<p id="msg"></p>
+
+<section id="cfg" hidden>
+<p class="note">Avval Supabase ulanishini kiriting (Project Settings, API bo'limidan). Faqat anon (publishable) kalitni kiriting, service_role yoki secret kalitni HECH QACHON kiritmang.</p>
+<input class="inp" id="cu" placeholder="Project URL (https://....supabase.co)" inputmode="url">
+<input class="inp" id="ck" placeholder="anon / publishable kalit" autocomplete="off">
+<button class="btn pri" id="csave">Saqlash</button>
+</section>
+
+<section id="login" hidden>
+<input class="inp" id="em" type="email" placeholder="Email" autocomplete="username">
+<input class="inp" id="pw" type="password" placeholder="Parol" autocomplete="current-password">
+<button class="btn pri" id="lg">Kirish</button>
+<button class="btn" id="cfgBtn">Ulanishni o'zgartirish</button>
+</section>
+
+<section id="app" hidden>
+<div class="top"><span id="who"></span><button class="btn" id="out">Chiqish</button></div>
+
+<details open><summary id="fsum">+ Yangi qo'shish</summary><div class="af">
+<input class="inp" id="f_t" placeholder="Sarlavha">
+<input class="inp" id="f_u" placeholder="Havola (YouTube, .mp4, .m3u8...)" inputmode="url">
+<textarea class="inp" id="f_d" placeholder="Bu nima haqida? (tavsif)"></textarea>
+<select class="inp" id="f_p"><option value="video">Videolar</option><option value="musiqa">Musiqa</option></select>
+<input class="inp" id="f_c" placeholder="Kategoriya (masalan: Pop, Animatsiya)">
+<input class="inp" id="f_h" placeholder="Kanal / qo'shiqchi nomi">
+<button class="btn pri" id="fs">Saqlash</button>
+<button class="btn" id="fc" hidden>Bekor qilish</button>
+</div></details>
+
+<details><summary>+ Ko'p qo'shish (ro'yxat)</summary><div class="af">
+<p class="note">Har qatorga bittadan:<br>Sarlavha | havola | tavsif | video yoki musiqa | kategoriya | kanal</p>
+<textarea class="inp" id="bulk" style="min-height:130px" spellcheck="false"></textarea>
+<button class="btn pri" id="bb">Ro'yxatni qo'shish</button></div></details>
+
+<details><summary>+ YouTube'dan qidirib qo'shish</summary><div class="af">
+<input class="inp" id="yk" type="password" placeholder="YouTube API kaliti" autocomplete="off">
+<input class="inp" id="yq" placeholder="Qo'shiq nomi yoki qidiruv so'zi">
+<select class="inp" id="yp"><option value="musiqa">Musiqa</option><option value="video">Videolar</option></select>
+<input class="inp" id="yc" placeholder="Kategoriya">
+<select class="inp" id="yn"><option value="1">1 ta (qo'shiq nomi bo'yicha)</option><option value="30">30 ta</option><option value="50" selected>50 ta</option><option value="100">100 ta</option><option value="150">150 ta</option></select>
+<button class="btn pri" id="yg">Qidirish va qo'shish</button></div></details>
+
+<input class="inp" id="q" type="search" placeholder="Ro'yxatdan qidirish">
+<p id="cnt" class="top"></p>
+<div id="list"></div>
+</section>
+</main>
+<script src="config.js"></script>
+<script>
+function $(x){return document.getElementById(x)}
+var C=window.DTV||{},URL_=C.url||localStorage.getItem("dtv_url")||"",KEY=C.key||localStorage.getItem("dtv_key")||"";
+var tok=sessionStorage.getItem("dtv_tok")||"",who=sessionStorage.getItem("dtv_who")||"",rows=[],editId=null;
+function msg(t,k){var m=$("msg");m.textContent=t||"";m.className=k||""}
+function show(s){["cfg","login","app"].forEach(function(x){$(x).hidden=x!==s})}
+function api(path,o){o=o||{};var h={apikey:KEY,"Content-Type":"application/json"};if(tok)h.Authorization="Bearer "+tok;for(var k in (o.headers||{}))h[k]=o.headers[k];o.headers=h;
+ return fetch(URL_+path,o).then(function(r){return r.text().then(function(t){var j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok){var e=new Error((j&&(j.message||j.msg||j.error_description))||("Xato "+r.status));e.status=r.status;throw e}return j})})}
+function errTxt(e){var m=e.message||"";if(e.status===401||e.status===403||/row-level|policy|permission/i.test(m))return "Ruxsat yo'q: bu akkaunt admin emas yoki siyosat ruxsat bermayapti. ("+m+")";return "Xato: "+m}
+function yt(u){var m=(u||"").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|live\/|shorts\/))([\w-]{11})/);return m?m[1]:null}
+function thumb(u){var i=yt(u);return i?"https://i.ytimg.com/vi/"+i+"/mqdefault.jpg":null}
+function dec(t){var e=document.createElement("textarea");e.innerHTML=t;return e.value}
+function load(){msg("Yuklanmoqda...");return api("/rest/v1/media?select=*&order=id.desc&limit=2000").then(function(j){rows=j||[];draw();msg("")}).catch(function(e){msg(errTxt(e),"err")})}
+function draw(){var q=$("q").value.trim().toLowerCase(),L=$("list");L.innerHTML="";
+ var f=rows.filter(function(r){return !q||((r.title||"")+" "+(r.description||"")+" "+(r.category||"")+" "+(r.channel||"")).toLowerCase().indexOf(q)>-1});
+ $("cnt").textContent="Jami: "+rows.length+(q?" | Topildi: "+f.length:"");
+ f.slice(0,100).forEach(function(r){var c=document.createElement("div");c.className="card";var w=document.createElement("div");w.className="row";
+  if(r.thumbnail){var im=document.createElement("img");im.src=r.thumbnail;im.alt="";w.appendChild(im)}
+  var t=document.createElement("div");t.className="t";var b=document.createElement("b");b.textContent=r.title||"Nomsiz";var s=document.createElement("small");s.textContent=(r.type||"video")+" · "+(r.category||"-")+(r.channel?" · "+r.channel:"");var u=document.createElement("small");u.textContent=r.url||"";
+  t.appendChild(b);t.appendChild(s);t.appendChild(u);w.appendChild(t);c.appendChild(w);
+  var a=document.createElement("div");a.className="acts";var e=document.createElement("button");e.className="btn";e.textContent="Tahrirlash";e.onclick=function(){edit(r)};
+  var d=document.createElement("button");d.className="btn red";d.textContent="O'chirish";d.onclick=function(){del(r)};a.appendChild(e);a.appendChild(d);c.appendChild(a);L.appendChild(c)});
+ if(f.length>100){var p=document.createElement("p");p.className="note";p.textContent="Birinchi 100 ta ko'rsatildi. Qidiruvdan foydalaning.";L.appendChild(p)}}
+function edit(r){editId=r.id;$("f_t").value=r.title||"";$("f_u").value=r.url||"";$("f_d").value=r.description||"";$("f_p").value=r.type==="musiqa"?"musiqa":"video";$("f_c").value=r.category||"";$("f_h").value=r.channel||"";$("fsum").textContent="Tahrirlash (ID "+r.id+")";$("fc").hidden=false;document.querySelector("details").open=true;window.scrollTo({top:0,behavior:"smooth"})}
+function resetForm(){editId=null;["f_t","f_u","f_d","f_c","f_h"].forEach(function(i){$(i).value=""});$("fsum").textContent="+ Yangi qo'shish";$("fc").hidden=true}
+$("fc").onclick=resetForm;
+$("fs").onclick=function(){var t=$("f_t").value.trim(),u=$("f_u").value.trim();if(!t||!u){msg("Sarlavha va havolani kiriting.","err");return}
+ var body={title:t,url:u,description:$("f_d").value.trim(),type:$("f_p").value,category:$("f_c").value.trim()||"Boshqa",channel:$("f_h").value.trim(),thumbnail:thumb(u)};
+ var p=editId?api("/rest/v1/media?id=eq."+editId,{method:"PATCH",headers:{Prefer:"return=representation"},body:JSON.stringify(body)}):api("/rest/v1/media",{method:"POST",headers:{Prefer:"return=representation"},body:JSON.stringify(body)});
+ msg("Saqlanmoqda...");p.then(function(j){if(!j||!j.length){msg("Saqlanmadi: ruxsat yo'q yoki yozuv topilmadi.","err");return}msg(editId?"Yangilandi.":"Qo'shildi.","ok");resetForm();return load().then(function(){msg("Saqlandi.","ok")})}).catch(function(e){msg(errTxt(e),"err")})};
+function del(r){if(!confirm("«"+(r.title||"")+"» o'chirilsinmi?"))return;api("/rest/v1/media?id=eq."+r.id,{method:"DELETE",headers:{Prefer:"return=representation"}}).then(function(j){if(!j||!j.length){msg("O'chirilmadi: ruxsat yo'q.","err");return}return load().then(function(){msg("O'chirildi.","ok")})}).catch(function(e){msg(errTxt(e),"err")})}
+function insertMany(arr,done){if(!arr.length){msg("Hech narsa qo'shilmadi.","err");return}var i=0,n=0;(function next(){if(i>=arr.length){load().then(function(){msg(n+" ta qo'shildi.","ok");if(done)done()});return}var ch=arr.slice(i,i+100);i+=100;api("/rest/v1/media",{method:"POST",headers:{Prefer:"return=representation"},body:JSON.stringify(ch)}).then(function(j){n+=(j||[]).length;next()}).catch(function(e){msg(errTxt(e)+" ("+n+" ta qo'shilgan edi)","err")})})()}
+$("bb").onclick=function(){var arr=[];$("bulk").value.split("\n").forEach(function(l){var p=l.split("|").map(function(z){return z.trim()});if(p.length>=2&&p[0]&&/^https?:\/\//i.test(p[1]))arr.push({title:p[0],url:p[1],description:p[2]||"",type:/musiq/i.test(p[3]||"")?"musiqa":"video",category:p[4]||"Boshqa",channel:p[5]||"",thumbnail:thumb(p[1])})});msg("Qo'shilmoqda...");insertMany(arr,function(){$("bulk").value=""})};
+$("yk").value=localStorage.getItem("dtv_yk")||"";
+$("yg").onclick=function(){var key=$("yk").value.trim(),qq=$("yq").value.trim(),tp=$("yp").value,cc=$("yc").value.trim()||"YouTube",n=parseInt($("yn").value,10)||50;if(!key||!qq){msg("YouTube kaliti va qidiruv so'zini kiriting.","err");return}
+ localStorage.setItem("dtv_yk",key);var have={};rows.forEach(function(r){have[r.url]=1});var out=[],tk="";msg("YouTube'dan qidirilmoqda...");
+ (function next(){var u="https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&videoSyndicated=true&maxResults=50&q="+encodeURIComponent(qq)+"&key="+encodeURIComponent(key)+(tk?"&pageToken="+tk:"");
+  fetch(u).then(function(r){return r.json()}).then(function(j){if(j.error){msg("YouTube xatosi: "+(j.error.message||"noma'lum"),"err");return}
+   (j.items||[]).forEach(function(it){var id=it.id&&it.id.videoId;if(!id)return;var link="https://www.youtube.com/watch?v="+id;if(have[link]||out.length>=n)return;have[link]=1;out.push({title:dec(it.snippet.title),url:link,description:dec(it.snippet.description||"").slice(0,220),type:tp,category:cc,channel:dec(it.snippet.channelTitle||""),thumbnail:"https://i.ytimg.com/vi/"+id+"/mqdefault.jpg"})});
+   if(out.length<n&&j.nextPageToken){tk=j.nextPageToken;next()}else{msg(out.length+" ta topildi, qo'shilmoqda...");insertMany(out)}}).catch(function(){msg("YouTube bilan ulanib bo'lmadi.","err")})})()};
+$("q").oninput=draw;
+$("lg").onclick=function(){var e=$("em").value.trim(),p=$("pw").value;if(!e||!p){msg("Email va parolni kiriting.","err");return}msg("Kirilmoqda...");
+ fetch(URL_+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:KEY,"Content-Type":"application/json"},body:JSON.stringify({email:e,password:p})}).then(function(r){return r.json()}).then(function(j){if(!j.access_token){msg("Kirib bo'lmadi: "+(j.error_description||j.msg||j.message||"email yoki parol noto'g'ri"),"err");return}
+  tok=j.access_token;who=(j.user&&j.user.email)||e;sessionStorage.setItem("dtv_tok",tok);sessionStorage.setItem("dtv_who",who);$("pw").value="";start()}).catch(function(){msg("Supabase bilan ulanib bo'lmadi. URL to'g'rimi?","err")})};
+$("out").onclick=function(){sessionStorage.clear();tok="";who="";msg("");show("login")};
+$("csave").onclick=function(){var u=$("cu").value.trim().replace(/\/$/,""),k=$("ck").value.trim();if(!/^https:\/\//.test(u)||!k){msg("URL va kalitni to'g'ri kiriting.","err");return}localStorage.setItem("dtv_url",u);localStorage.setItem("dtv_key",k);URL_=u;KEY=k;msg("");init()};
+$("cfgBtn").onclick=function(){$("cu").value=URL_;$("ck").value=KEY;show("cfg")};
+function start(){show("app");$("who").textContent="Kirgan: "+who;load()}
+function init(){if(!URL_||!KEY){show("cfg");return}if(tok){start()}else show("login")}
+init();
+</script>
+</body>
+</html>
